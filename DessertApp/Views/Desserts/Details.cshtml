@@ -1,0 +1,111 @@
+﻿@model DessertApp.Models.Dessert
+
+@{
+    ViewBag.Title = "Recipe";
+}
+
+<div class="container">
+    <h4> @Html.DisplayFor(model => model.Title)</h4>
+        <div class="text-center">
+
+            <h6 class="glyphicon glyphicon-thumbs-up"></h6> 
+               
+
+                @Html.DisplayFor(model => model.Like)
+               
+                <h6 class="glyphicon glyphicon-thumbs-down"></h6>
+
+                @Html.DisplayFor(model => model.Dislikes)
+
+        </div>
+
+    <hr />
+
+    <div class="image-details pull-right">
+        <img src="@Url.Content(Model.DessertArtUrl)" alt="Dessert" height="200" width="210"
+             style="border:2px solid white; margin-top:0px"; />
+  
+
+    </div>
+
+    <div class="panel-body" style="width:105%">
+    <div class="col-sm-4">
+        <dl class="details" style="padding-top:35px">
+            <dt>
+                Recipe By
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.User)
+                <br /><br />
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Dietary)
+
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Dietary)
+                <br /><br />
+
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PrepTime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PrepTime) mins
+                <br /><br />
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CookTime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CookTime) mins
+                <br /><br />
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Servings)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Servings)
+                <br /><br />
+            </dd>
+            
+            <dt class="text-left"> @Html.DisplayNameFor(model => model.Ingredients)</dt>
+
+            <dd class="text-left">
+                @Html.DisplayFor(model => model.Ingredients)
+                <br /><br />
+            </dd>
+
+            <dt class="text-left">
+                @Html.DisplayNameFor(model => model.RecipeMethod)
+            </dt>
+
+            <dd class="text-left">
+                @Html.DisplayFor(model => model.RecipeMethod)
+                <br /><br />
+            </dd>
+            
+            <dt class="text-left">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-md " })
+                <br /><br />
+</dt>
+            <dd class="btn btn-default btn-sm">
+                @Html.ActionLink("Back to Desserts", "Index")
+            </dd>
+            </dl>
+
+
+        
+
+        </div>
+
+    
+        </div>
+</div>
+   

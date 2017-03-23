@@ -1,0 +1,141 @@
+﻿@model PagedList.IPagedList<DessertApp.Models.Dessert>
+    @using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Desserts";
+}
+
+<div class="container">
+    <a href="@Url.Action("Index","Home")">
+        <div class="homeheading">
+            <h1>Desserts</h1>
+        </div>
+    </a>
+</div>
+
+<p class="pull-right">
+    @Html.ActionLink("Add New Dessert", "Create")
+</p>
+<br />
+
+@using (Html.BeginForm("Index", "Desserts", FormMethod.Get))
+{
+    <p class="searchbox">
+        @Html.TextBox("search", ViewBag.CurrentFilter as string, new { @placeholder = "Title/Dietary" })
+        <input type="submit" value="Filter" />
+    </p>
+}
+<div>
+    <br />
+</div>
+<table class="table table-striped">
+    <tr>
+        <th class="text-center"></th>
+        <th class="text-center">
+            @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th class="text-center">
+            @Html.ActionLink("Dietary Requirements", "Index", new { sortOrder = ViewBag.DietarySortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+
+        <th class="text-center">
+            Cooking Time <br />(in mins)
+        </th>
+
+        <th class="text-center">
+            Serves
+        </th>
+
+        <th class="text-center">
+            Rate the Dessert!
+        </th>
+
+        <th class="text-center">
+            Ratings
+        </th>
+
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td >
+            <img src="@Url.Content(item.DessertArtUrl)" id="hover" alt="Dessert" class="img-rounded" height="100" width="100"
+                 style="border-color:black"  />
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.Dietary)
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.CookTime)
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.Servings)
+        </td>
+       
+        <td class="pull-left ">
+
+            <ul class="glyphicon-align-center btn-sm">
+
+                @Html.ActionLink("Likes", "Like", new { item.Id }, new { @class = "btn btn-success  btn-sm" })
+                
+                
+            
+                @Html.ActionLink("Dislikes", "Dislike", new { item.Id }, new { @class = "btn btn-danger btn-sm" })
+
+            </ul>
+
+        </td>
+        <td class="">
+
+            <i class="glyphicon glyphicon-thumbs-up">
+                <i />
+
+
+                @Html.DisplayFor(modelItem => item.Like)
+
+                <br /><br /><br />
+                <i class="glyphicon glyphicon-thumbs-down"></i>
+
+                @Html.DisplayFor(modelItem => item.Dislikes)
+
+        </td>
+
+        
+        
+        
+        <td class="text-center">
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+
+<br />
+
+ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
+@section Scripts {
+
+
+    <script src="~/Scripts/App/DessertScripts.js"></script>
+    
+  
+
+    }
+
+
+    

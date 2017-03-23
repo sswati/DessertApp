@@ -1,0 +1,72 @@
+﻿@model DessertApp.Models.Dessert
+
+@{
+    ViewBag.Title = "Delete Dessert";
+}
+
+
+
+<h4>Are you sure you want to delete the @Html.DisplayFor(model => model.Title) recipe?</h4>
+
+<br />
+<div>
+
+    <h4>
+        <img src="@Url.Content(Model.DessertArtUrl)" alt="dessert" width="220" height="200" style="border:2px solid white" ;>
+
+    </h4>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt class="control-label col-sm-3">
+            @Html.DisplayNameFor(model => model.Like)
+        </dt>
+
+        <dd class="deletedesign col-sm-3">
+            @Html.DisplayFor(model => model.Like)
+           
+
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Dislikes)
+        </dt>
+
+        <dd class="deletedesign col-sm-3">
+            @Html.DisplayFor(model => model.Dislikes)
+            
+
+        </dd>
+
+        
+
+        <dt class="control-label col-sm-3">
+          
+            <b>Recipe By</b>
+        </dt>
+
+        <dd class="deletedesign col-sm-5">
+            
+            @Html.DisplayFor(model => model.User)
+        </dd>
+
+    </dl>
+
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary btn-md" />
+
+
+            <div class="btn btn-default btn-md">
+                @Html.ActionLink("Back to Desserts", "Index")
+            </div>
+        </div>
+    }
+</div>
+
+
+

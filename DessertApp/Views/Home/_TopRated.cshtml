@@ -1,0 +1,44 @@
+﻿@model DessertApp.Models.Dessert
+
+
+
+
+
+
+<div class="panel-primary col-sm-11" style="margin-left:135px; margin-right:130px">
+
+    <div class="panel-heading col-sm-8">
+        <h3 class="panel-title">Top Rated Dessert: @Model.Title</h3>
+    </div>
+    <div class="panel-body col-sm-8">
+        <p class="img-topRated col-sm-6" style="padding-right: 0px; padding-left:0px; padding-top:0px;">
+
+            <br />
+
+            
+                <img alt="@Model.Title"
+                     src="@Url.Content(@Model.DessertArtUrl)" width="170" height="170" class="img-rounded"
+                      style="margin:0px auto;  border:3px solid darkred" />
+            </p>
+
+        <br />
+
+        <div id="dessert-details col-sm-3">
+            <p>
+                <b>Likes:</b>
+                @Model.Like
+            </p>
+            <p>
+            <b>Recipe By:</b>
+             @Model.User</p>
+
+            @Html.ActionLink("View Recipe","Details", "Desserts", new { id = Model.Id }, new { @class = "btn btn-default btn-md" })
+            
+            
+           
+           
+        </div>
+    </div>
+</div>
+
+<br />

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DessertApp.Models.Dessert>
+
+@{
+    ViewBag.Title = "Ever So Sweet Desserts";
+}
+
+<div class="homeheading">
+    <h1>Ever So Sweet Desserts</h1>
+</div>
+
+
+  <h5><b>  @Html.ActionLink("Explore Delicious Dessert Recipes", "Index", "Desserts") </b></h5>
+
+<br />
+
+<div id="myCarousel" class="carousel slide " style="width:450px; height: auto; margin:0 auto; border:ridge 6px darkred; " data-ride="carousel">
+
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        @{int i = 0;}
+        @foreach (var item in Model)
+        {
+            {
+                i++;
+                var active = i == 1 ? "active" : "";
+                <div class="item @active">
+
+                    <a href="@Url.Action("Details", "Desserts", new { Id = item.Id })">
+                        <img src="@Url.Content(item.DessertArtUrl)" alt="Dessert">
+
+                    </a>
+
+                </div>
+
+
+            }
+        }
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<br />
+
+@section Scripts {
+    
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    }
+
+
+<div id="toprated">
+    @Ajax.ActionLink("View Top Rated Dessert",
+    "TopRated",
+    null,
+    new AjaxOptions
+    { UpdateTargetId = "toprated",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "GET"
+    },
+
+    new { @class = "btn btn-primary"})
+
+</div>
